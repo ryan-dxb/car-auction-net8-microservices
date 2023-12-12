@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AuctionService.Migrations
 {
     [DbContext(typeof(AuctionDbContext))]
-    [Migration("20231212075059_inital Migrations")]
+    [Migration("20231212080044_inital Migrations")]
     partial class initalMigrations
     {
         /// <inheritdoc />
@@ -60,7 +60,6 @@ namespace AuctionService.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Winner")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

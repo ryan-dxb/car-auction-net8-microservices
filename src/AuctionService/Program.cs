@@ -11,6 +11,9 @@ builder.Services.AddDbContext<AuctionDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// Add AutoMapper (Gets all the profiles derived from Profile class from the current assembly)
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 var app = builder.Build();
 
@@ -18,5 +21,14 @@ var app = builder.Build();
 app.UseAuthorization();
 
 app.MapControllers();
+
+try
+{
+    DbInitalizer.InitDb(app);
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
 
 app.Run();

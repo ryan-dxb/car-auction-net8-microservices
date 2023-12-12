@@ -57,7 +57,6 @@ namespace AuctionService.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Winner")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
