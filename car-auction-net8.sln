@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionService", "src\AuctionService\AuctionService.csproj", "{C5C05C8C-69AD-48BA-8097-1D39333E2546}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E984033B-FCCE-4971-9556-50B6DF423D34}"
+	ProjectSection(SolutionItems) = preProject
+		src\AuctionService\Notes.txt = src\AuctionService\Notes.txt
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchService", "src\SearchService\SearchService.csproj", "{62E16AB1-C634-4264-9958-29E7EA8F67F9}"
 EndProject
