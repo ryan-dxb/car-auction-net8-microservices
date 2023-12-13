@@ -99,8 +99,10 @@ namespace AuctionService.Controllers
             auction.Item.Color = updateAuctionDTO.Color ?? auction.Item.Color;
             auction.Item.Mileage = updateAuctionDTO.Mileage ?? auction.Item.Mileage;
 
+            await publishEndpoint.Publish(mapper.Map<AuctionUpdated>(auction));
 
             var result = await auctionDbContext.SaveChangesAsync() > 0;
+
             if (!result)
             {
                 return BadRequest();
@@ -124,7 +126,10 @@ namespace AuctionService.Controllers
 
             auctionDbContext.Remove(auction);
 
+            await publishEndpoint.Publish<AuctionDeleted>(new { Id = auction.Id.ToString() });
+
             var result = await auctionDbContext.SaveChangesAsync() > 0;
+
             if (!result)
             {
                 return BadRequest();

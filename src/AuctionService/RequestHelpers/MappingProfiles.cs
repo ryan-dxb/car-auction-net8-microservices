@@ -21,6 +21,10 @@ namespace AuctionService.RequestHelpers
 
             // Mapping for Contracts
             CreateMap<AuctionDTO, AuctionCreated>();
+
+            CreateMap<Auction, AuctionUpdated>().IncludeMembers(x => x.Item);
+
+            CreateMap<Item, AuctionUpdated>();
         }
     }
 }
