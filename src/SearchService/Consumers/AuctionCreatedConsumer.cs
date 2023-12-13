@@ -21,6 +21,10 @@ namespace SearchService.Consumers
 
             var item = mapper.Map<Item>(context.Message);
 
+            // Error Throw for testing
+
+            if (item.Model == "Foo") throw new ArgumentException("Foo is not a valid model");
+
             await item.SaveAsync();
         }
 

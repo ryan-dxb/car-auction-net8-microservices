@@ -26,6 +26,14 @@ builder.Services.AddMassTransit(config =>
     {
         /* cfg.Host("rabbitmq://localhost"); */
 
+        cfg.ReceiveEndpoint("search-service-auction-created", e =>
+        {
+            // Will retry 3 times with 5 seconds interval between each retry if an exception is thrown
+            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+
+            e.ConfigureConsumer<AuctionCreatedConsumer>(ctx);
+        });
+
         cfg.ConfigureEndpoints(ctx);
     });
 });

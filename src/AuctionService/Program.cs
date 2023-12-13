@@ -1,3 +1,4 @@
+using AuctionService.Consumers;
 using AuctionService.Data;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,18 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // MassTransit
 builder.Services.AddMassTransit(config =>
 {
+    config.AddEntityFrameworkOutbox<AuctionDbContext>(options =>
+    {
+        options.QueryDelay = TimeSpan.FromSeconds(10);
+
+        options.UsePostgres();
+        options.UseBusOutbox();
+    });
+
+    config.AddConsumersFromNamespaceContaining<AuctionCreatedFaultConsumer>();
+
+    config.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("AuctionService", false));
+
     config.UsingRabbitMq((ctx, cfg) =>
     {
         /* cfg.Host("rabbitmq://localhost"); */

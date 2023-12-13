@@ -64,11 +64,11 @@ namespace AuctionService.Controllers
 
             auctionDbContext.Auctions.Add(auction);
 
-            var result = await auctionDbContext.SaveChangesAsync() > 0;
-
             var newAuction = mapper.Map<AuctionDTO>(auction);
 
             await publishEndpoint.Publish(mapper.Map<AuctionCreated>(newAuction));
+
+            var result = await auctionDbContext.SaveChangesAsync() > 0;
 
             if (!result)
             {
