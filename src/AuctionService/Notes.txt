@@ -1,8 +1,0 @@
-Steps to create a new project:
-1 - Entities -> Models
-2 - DB Context -> Data / Database // This is the class that will connect to the database
-
-
-For Async Messaging:
-- Create rabitMq server using docker
-- Add masstransit nuget package // Acts like a wrapper for rabbitMq server similar to entity framework

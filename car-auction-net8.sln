@@ -7,12 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionService", "src\Aucti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E984033B-FCCE-4971-9556-50B6DF423D34}"
 	ProjectSection(SolutionItems) = preProject
-		src\AuctionService\Notes.txt = src\AuctionService\Notes.txt
+		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchService", "src\SearchService\SearchService.csproj", "{62E16AB1-C634-4264-9958-29E7EA8F67F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "src\IdentityService\IdentityService.csproj", "{05336A5A-78B0-4E78-9BB0-C64AA3A2AD67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService", "src\IdentityService\IdentityService.csproj", "{05336A5A-78B0-4E78-9BB0-C64AA3A2AD67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayService", "src\GatewayService\GatewayService.csproj", "{F530BFB1-04A1-4439-81AB-E48BB63D4AAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{05336A5A-78B0-4E78-9BB0-C64AA3A2AD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05336A5A-78B0-4E78-9BB0-C64AA3A2AD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05336A5A-78B0-4E78-9BB0-C64AA3A2AD67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F530BFB1-04A1-4439-81AB-E48BB63D4AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F530BFB1-04A1-4439-81AB-E48BB63D4AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F530BFB1-04A1-4439-81AB-E48BB63D4AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F530BFB1-04A1-4439-81AB-E48BB63D4AAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
