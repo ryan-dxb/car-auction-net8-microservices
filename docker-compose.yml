@@ -8,8 +8,7 @@ services:
         volumes:
             - postgres-data:/var/lib/postresql/data
         networks:
-            auction-network:
-                ipv4_address: 172.18.0.1
+            custom-network:
 
     mongodb:
         image: mongo
@@ -21,8 +20,7 @@ services:
         volumes:
             - mongodb-data:/data/db # Persist data in a named volume (mongodb-data)
         networks:
-            auction-network:
-                ipv4_address: 172.18.0.2
+            custom-network:
 
     rabbitMq:
         image: rabbitmq:3-management-alpine
@@ -32,8 +30,7 @@ services:
         volumes:
             - rabbitmq-data:/var/lib/rabbitmq
         networks:
-            auction-network:
-                ipv4_address: 172.18.0.3
+            custom-network:
 
     auction-svc:
         build:
@@ -57,8 +54,7 @@ services:
             - postgres
             - rabbitMq
         networks:
-            auction-network:
-                ipv4_address: 172.18.0.4
+            custom-network:
 
     search-svc:
         build:
@@ -76,8 +72,7 @@ services:
             - mongodb
             - rabbitMq
         networks:
-            auction-network:
-                ipv4_address: 172.18.0.5
+            custom-network:
 
     identity-svc:
         build: 
@@ -92,8 +87,8 @@ services:
         depends_on:
             - postgres
         networks:
-            auction-network:
-                ipv4_address: 172.18.0.6
+            custom-network:
+                ipv4_address: 10.5.0.200
 
     gateway-svc:
         build: 
@@ -105,8 +100,7 @@ services:
         ports:
             - 6001:80
         networks:
-            auction-network:
-                ipv4_address: 172.18.0.7
+            custom-network:
 
     bid-svc:
         build: 
@@ -116,7 +110,7 @@ services:
             - ASPNETCORE_ENVIRONMENT=Development
             - ASPNETCORE_URLS=http://+:80
             - RabbitMq__Host=rabbitmq
-            - ConnectionStrings__BidDbConnection=mongodb://root:mongopw@mongodb
+            - ConnectionStrings__BidDbConnection=mongodb://admin:password@mongodb
             - IdentityServiceUrl=http://identity-svc
             - GrpcAuction=http://auction-svc:7777
         ports:
@@ -125,15 +119,28 @@ services:
             - mongodb
             - rabbitMq
         networks:
-            auction-network:
-                ipv4_address: 172.18.0.7
+            custom-network:
+
+    notify-svc:
+        build: 
+            context: .
+            dockerfile: ./src/NotificationService/Dockerfile
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:80
+            - RabbitMq__Host=rabbitmq
+        ports:
+            - 7004:80
+        depends_on:
+            - rabbitMq
+        networks:
+            custom-network:
 
 networks:
-    auction-network:
+    custom-network:
         ipam:
-            driver: default
             config:
-                - subnet: 172.18.0.0/16
+                - subnet: 10.5.0.0/16
 
 volumes:
     mongodb-data: 
